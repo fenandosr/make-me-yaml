@@ -1,0 +1,25 @@
+# Proxy inverso (ejemplo con comentarios, comillas y anclas)
+puerto: 443            # HTTPS
+http_redirect: true
+servidor: "mi-sitio.example.com"
+
+tls:
+  certificado: /etc/ssl/mi-sitio.pem
+  clave: /etc/ssl/mi-sitio.key
+  protocolos:
+  - TLSv1.2            # mínimo aceptable
+  - TLSv1.3
+
+# Parámetros comunes reutilizados por los upstreams
+defaults: &defaults
+  timeout_s: 30
+  reintentos: 2
+
+upstreams:
+  - nombre: app
+    destino: "http://127.0.0.1:3000"
+    <<: *defaults
+  - nombre: api
+    destino: "http://127.0.0.1:4000"
+    timeout_s: 10      # más corto que el valor común
+    reintentos: 0

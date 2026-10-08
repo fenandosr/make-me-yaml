@@ -1,0 +1,6 @@
+# Sin schema a propósito: se abre solo en modo YAML crudo
+max_connections: 200
+shared_buffers: 512MB
+extensiones:
+  - pg_stat_statements
+  - pgcrypto

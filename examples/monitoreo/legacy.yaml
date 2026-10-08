@@ -1,0 +1,9 @@
+# yaml-language-server: $schema=./alertas.schema.json
+# Ejemplo: el schema se declara en la cabecera y el valor de abajo es
+# inválido a propósito (umbral > 100) para ver la insignia de aviso.
+intervalo_s: 30
+canal: slack
+reglas:
+  - nombre: Latencia
+    umbral: 150
+    severidad: aviso

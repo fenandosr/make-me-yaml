@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Make Me YAML!</title>
+    <link rel="icon" type="image/png" href="brand/favicon.png" />
+    <link rel="preload" href="fonts/comic-neue-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="fonts/bangers-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div id="workspace-start" hidden></div>
+    <div id="app" hidden>
+      <header class="topbar">
+        <button id="menu-toggle" class="btn ghost" aria-label="Mostrar u ocultar la lista de archivos">☰</button>
+        <img class="brand-logo" src="brand/logo.webp" alt="" width="34" height="37" />
+        <strong class="brand-name">Make Me YAML!</strong>
+      </header>
+
+      <aside id="sidebar" aria-label="Archivos">
+        <div class="side-head">
+          <button id="home-btn" class="brand" title="Ir al inicio"><img class="brand-logo" src="brand/logo.webp" alt="" width="44" height="48" /><span class="brand-name">Make Me YAML!</span></button>
+          <button id="refresh" class="btn small ghost" title="Volver a leer los archivos del disco">↻</button>
+        </div>
+        <button id="change-workspace" class="btn small workspace-switch" hidden>Cambiar carpeta</button>
+        <input id="search" type="search" placeholder="Buscar archivo…  ( / )" aria-label="Buscar archivo" autocomplete="off" />
+        <div class="side-tabs" role="tablist" aria-label="Filtro">
+          <button class="tab active" data-tab="all" role="tab">Todos</button>
+          <button class="tab" data-tab="recent" role="tab">Recientes</button>
+          <button class="tab" data-tab="fav" role="tab">Favoritos</button>
+          <select id="view" aria-label="Vista">
+            <option value="tree">Árbol</option>
+            <option value="list">Lista</option>
+          </select>
+        </div>
+        <nav id="tree" role="tree" aria-label="Árbol de archivos"></nav>
+      </aside>
+
+      <main id="main">
+        <section id="home"></section>
+        <section id="editor" hidden></section>
+      </main>
+    </div>
+
+    <dialog id="history-dialog">
+      <form method="dialog">
+        <h3>Historial</h3>
+        <p class="hint">Copias guardadas automáticamente antes de cada cambio. Restaurar crea una copia de la versión actual.</p>
+        <div id="history-list"></div>
+        <menu><button class="btn">Cerrar</button></menu>
+      </form>
+    </dialog>
+
+    <div id="toast" role="status" aria-live="polite" hidden></div>
+    <script type="module" src="boot.js"></script>
+  </body>
+</html>

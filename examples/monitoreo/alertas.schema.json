@@ -1,0 +1,23 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Reglas de alerta",
+  "type": "object",
+  "required": ["intervalo_s", "reglas"],
+  "properties": {
+    "intervalo_s": { "type": "integer", "title": "Intervalo de evaluación (s)", "minimum": 10, "default": 60 },
+    "canal": { "type": "string", "enum": ["correo", "slack", "webhook"], "default": "correo" },
+    "reglas": {
+      "type": "array",
+      "title": "Reglas",
+      "items": {
+        "type": "object",
+        "required": ["nombre", "umbral"],
+        "properties": {
+          "nombre": { "type": "string", "minLength": 1 },
+          "umbral": { "type": "number", "title": "Umbral (%)", "minimum": 0, "maximum": 100 },
+          "severidad": { "type": "string", "enum": ["aviso", "critica"], "default": "aviso" }
+        }
+      }
+    }
+  }
+}

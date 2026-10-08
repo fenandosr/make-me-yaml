@@ -1,0 +1,35 @@
+# Manifiesto OPCIONAL. El editor escanea la carpeta y este archivo enriquece
+# o restringe lo encontrado. Las rutas son relativas a esta carpeta.
+
+include: ["**/*.yaml", "**/*.yml"]
+exclude: ["**/secrets/**"]   # además de .git, node_modules, *.bak y el historial
+only_listed: false           # true = solo se editan los archivos de "files"
+
+folders:
+  servicios:
+    title: Servicios
+    description: Un archivo por servicio desplegado
+  servicios/web:
+    title: Capa web
+    description: Proxy inverso y aplicación principal
+  monitoreo:
+    title: Monitoreo
+    description: Alertas y umbrales
+
+files:
+  global.yaml:
+    title: Ajustes globales
+    description: Entorno, zona horaria y registro
+    group: General
+    restart_required: true
+  servicios/web/nginx.yaml:
+    title: Proxy inverso
+    description: Puertos, upstreams y TLS
+    group: Servicios
+  servicios/web/app.yaml:
+    title: Aplicación principal
+    description: Base de datos, correo y funciones activables
+    group: Servicios
+  monitoreo/alertas.yaml:
+    title: Reglas de alerta
+    group: Monitoreo

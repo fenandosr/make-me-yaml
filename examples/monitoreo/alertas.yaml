@@ -1,0 +1,9 @@
+intervalo_s: 60
+canal: correo
+reglas:
+  - nombre: CPU alta
+    umbral: 90
+    severidad: critica
+  - nombre: Disco casi lleno
+    umbral: 85
+    severidad: aviso

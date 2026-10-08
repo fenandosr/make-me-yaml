@@ -1,0 +1,50 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Proxy inverso",
+  "type": "object",
+  "required": ["puerto", "servidor"],
+  "definitions": {
+    "comunes": {
+      "type": "object",
+      "properties": {
+        "timeout_s": { "type": "integer", "title": "Timeout (s)", "minimum": 1, "maximum": 600, "default": 30 },
+        "reintentos": { "type": "integer", "title": "Reintentos", "minimum": 0, "maximum": 10, "default": 1 }
+      }
+    }
+  },
+  "properties": {
+    "puerto": { "type": "integer", "title": "Puerto", "minimum": 1, "maximum": 65535, "x-restart-required": true },
+    "http_redirect": { "type": "boolean", "title": "Redirigir HTTP a HTTPS", "default": true },
+    "servidor": { "type": "string", "title": "Nombre del servidor", "format": "hostname" },
+    "tls": {
+      "type": "object",
+      "title": "TLS",
+      "properties": {
+        "certificado": { "type": "string", "title": "Certificado" },
+        "clave": { "type": "string", "title": "Clave privada (ruta)" },
+        "protocolos": {
+          "type": "array",
+          "title": "Protocolos",
+          "uniqueItems": true,
+          "items": { "type": "string", "enum": ["TLSv1.2", "TLSv1.3"] }
+        }
+      }
+    },
+    "defaults": { "$ref": "#/definitions/comunes", "title": "Valores comunes" },
+    "upstreams": {
+      "type": "array",
+      "title": "Upstreams",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["nombre", "destino"],
+        "properties": {
+          "nombre": { "type": "string", "minLength": 1 },
+          "destino": { "type": "string", "format": "uri" },
+          "timeout_s": { "type": "integer", "minimum": 1, "maximum": 600 },
+          "reintentos": { "type": "integer", "minimum": 0, "maximum": 10 }
+        }
+      }
+    }
+  }
+}

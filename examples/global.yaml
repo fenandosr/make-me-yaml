@@ -1,0 +1,7 @@
+# Ajustes globales de la plataforma
+entorno: staging         # produccion | staging | desarrollo
+zona_horaria: America/Mexico_City
+registro:
+  nivel: warn
+  rotar_dias: 14
+modo_mantenimiento: false

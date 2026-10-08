@@ -1,0 +1,27 @@
+# Aplicación principal
+nombre: Mi Aplicación
+base_datos:
+  host: db.interna
+  puerto: 5432
+  usuario: app
+  clave: s3creta-demo     # secreto: el formulario nunca la muestra
+  pool: 10
+
+correo:
+  activo: true
+  servidor: smtp.example.com
+  remitente: avisos@example.com
+
+funciones:               # interruptores por nombre
+  nuevo_panel: true
+  exportar_csv: false
+
+administradores:
+  - nombre: Ana
+    correo: ana@example.com
+  - nombre: Luis
+    correo: luis@example.com
+
+etiquetas:
+  region: mx
+  equipo: plataforma

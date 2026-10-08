@@ -1,0 +1,53 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Aplicación principal",
+  "type": "object",
+  "required": ["nombre", "base_datos"],
+  "properties": {
+    "nombre": { "type": "string", "title": "Nombre", "minLength": 1, "maxLength": 60 },
+    "base_datos": {
+      "type": "object",
+      "title": "Base de datos",
+      "required": ["host", "puerto"],
+      "properties": {
+        "host": { "type": "string", "title": "Servidor" },
+        "puerto": { "type": "integer", "minimum": 1, "maximum": 65535, "default": 5432, "x-restart-required": true },
+        "usuario": { "type": "string" },
+        "clave": { "type": "string", "title": "Contraseña", "format": "password", "x-secret": true },
+        "pool": { "type": "integer", "title": "Conexiones en el pool", "minimum": 1, "maximum": 200, "default": 10 }
+      }
+    },
+    "correo": {
+      "type": "object",
+      "title": "Correo saliente",
+      "properties": {
+        "activo": { "type": "boolean", "default": false },
+        "servidor": { "type": "string" },
+        "remitente": { "type": "string", "format": "email" }
+      }
+    },
+    "funciones": {
+      "type": "object",
+      "title": "Funciones activables",
+      "description": "Nombre de la función → encendida o apagada.",
+      "additionalProperties": { "type": "boolean" }
+    },
+    "administradores": {
+      "type": "array",
+      "title": "Administradores",
+      "items": {
+        "type": "object",
+        "required": ["nombre", "correo"],
+        "properties": {
+          "nombre": { "type": "string", "minLength": 1 },
+          "correo": { "type": "string", "format": "email" }
+        }
+      }
+    },
+    "etiquetas": {
+      "type": "object",
+      "title": "Etiquetas",
+      "additionalProperties": { "type": "string" }
+    }
+  }
+}

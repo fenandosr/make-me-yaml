@@ -1,0 +1,38 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Ajustes globales",
+  "type": "object",
+  "required": ["entorno"],
+  "additionalProperties": false,
+  "properties": {
+    "entorno": {
+      "type": "string",
+      "title": "Entorno",
+      "description": "Dónde corre esta instalación.",
+      "enum": ["produccion", "staging", "desarrollo"],
+      "x-restart-required": true
+    },
+    "zona_horaria": {
+      "type": "string",
+      "title": "Zona horaria",
+      "description": "Nombre IANA, por ejemplo America/Mexico_City.",
+      "default": "UTC",
+      "pattern": "^[A-Za-z_]+(/[A-Za-z_+-]+)*$"
+    },
+    "registro": {
+      "type": "object",
+      "title": "Registro",
+      "additionalProperties": false,
+      "properties": {
+        "nivel": { "type": "string", "enum": ["debug", "info", "warn", "error"], "default": "info" },
+        "rotar_dias": { "type": "integer", "title": "Rotar cada (días)", "minimum": 1, "maximum": 365, "default": 7 }
+      }
+    },
+    "modo_mantenimiento": {
+      "type": "boolean",
+      "title": "Modo mantenimiento",
+      "description": "Muestra una página de aviso en lugar de la aplicación.",
+      "default": false
+    }
+  }
+}
